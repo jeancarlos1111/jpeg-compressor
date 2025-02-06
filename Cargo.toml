@@ -4,6 +4,7 @@ version = "0.1.0"
 authors = ["Jean Zamora <jeancarloscuatro1@gmail.com>"]
 description = "Change the quality of a base64 jpeg image easily from javascript."
 license = "MIT"
+repository = "https://github.com/jeancarlos1111/jpeg-compressor"
 edition = "2021"
 
 [lib]
