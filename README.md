@@ -1,80 +1,81 @@
 <div align="center">
-
-  <h1><code>wasm-pack-template</code></h1>
-
-  <strong>A template for kick starting a Rust and WebAssembly project using <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a>.</strong>
-
-  <p>
-    <a href="https://travis-ci.org/rustwasm/wasm-pack-template"><img src="https://img.shields.io/travis/rustwasm/wasm-pack-template.svg?style=flat-square" alt="Build Status" /></a>
-  </p>
-
-  <h3>
-    <a href="https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html">Tutorial</a>
-    <span> | </span>
-    <a href="https://discordapp.com/channels/442252698964721669/443151097398296587">Chat</a>
-  </h3>
-
-  <sub>Built with 🦀🕸 by <a href="https://rustwasm.github.io/">The Rust and WebAssembly Working Group</a></sub>
+<image src="lcj.png" alt="Descripción de la imagen">
 </div>
 
-## About
+# JPEG-COMPRESSOR
 
-[**📚 Read this template tutorial! 📚**][template-docs]
+**JPEG-COMPRESSOR** is a high-performance tool for compressing JPEG images using **Rust** and **WebAssembly**. It provides a simple API to reduce the file size of JPEG images while maintaining visual quality, making it ideal for web and backend applications.
 
-This template is designed for compiling Rust libraries into WebAssembly and
-publishing the resulting package to NPM.
+---
 
-Be sure to check out [other `wasm-pack` tutorials online][tutorials] for other
-templates and usages of `wasm-pack`.
+## Features
 
-[tutorials]: https://rustwasm.github.io/docs/wasm-pack/tutorials/index.html
-[template-docs]: https://rustwasm.github.io/docs/wasm-pack/tutorials/npm-browser-packages/index.html
+- ⚡ **Blazing Fast Compression**: Built with Rust for maximum performance.
+- 🌐 **Web-Compatible**: Compiled to WebAssembly for seamless use in browsers.
+- 📦 **Simple API**: Compress images directly from base64 strings.
+- 🎚️ **Custom Quality**: Adjust compression level (0-100) to balance quality and size.
+- 🔄 **Lossless Option**: Supports lossless compression for minimal quality degradation.
 
-## 🚴 Usage
+---
 
-### 🐑 Use `cargo generate` to Clone this Template
+## Installation
 
-[Learn more about `cargo generate` here.](https://github.com/ashleygwilliams/cargo-generate)
-
-```
-cargo generate --git https://github.com/rustwasm/wasm-pack-template.git --name my-project
-cd my-project
-```
-
-### 🛠️ Build with `wasm-pack build`
-
-```
-wasm-pack build
+### Rust (via GitHub)
+Add this to your `Cargo.toml`:
+```toml
+[dependencies]
+jpeg-compressor = { git = "https://github.com/jeancarlos1111/jpeg-compressor.git" }
 ```
 
-### 🔬 Test in Headless Browsers with `wasm-pack test`
+### Web (npm)
+```bash
+ npm install @jeanzg32/jpeg-compressor
+ ```
 
-```
-wasm-pack test --headless --firefox
-```
+## Usage
 
-### 🎁 Publish to NPM with `wasm-pack publish`
+### Rust
+```rust
+use jpeg_compressor::compress_jpeg;
 
-```
-wasm-pack publish
-```
+fn main()-> Result<String> {
+    let base64_image = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/...";
+    let quality = 80;
+    let compressed = compress_jpeg(base64_image, quality)?;
+    println!("Compressed size: {}", compressed.len());
+    Ok(())
+}
+ ```
 
-## 🔋 Batteries Included
+ ### JavaScript (WebAssembly)
+```js
+import init, { compress_jpeg } from '@jeanzg32/jpeg-compressor';
 
-* [`wasm-bindgen`](https://github.com/rustwasm/wasm-bindgen) for communicating
-  between WebAssembly and JavaScript.
-* [`console_error_panic_hook`](https://github.com/rustwasm/console_error_panic_hook)
-  for logging panic messages to the developer console.
-* `LICENSE-APACHE` and `LICENSE-MIT`: most Rust projects are licensed this way, so these are included for you
+async function compressImage() {
+  await init();
+  const base64Image = document.getElementById('image-input').value;
+  const quality = 75;
+  try {
+    const compressed = await compress_jpeg(base64Image, quality);
+    console.log('Compression success:', compressed);
+  } catch (error) {
+    console.error('Compression failed:', error);
+  }
+}
+ ```
 
+
+> [!NOTE]
+> Calidades menores a 80 pueden producir artefactos visibles.
+>
+> No soporta otros formatos de imagen (solo JPEG).
+>
+> Para imágenes muy grandes, considerar usar Web Workers.
+---
 ## License
 
-Licensed under either of
-
-* Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
 * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
-at your option.
 
 ### Contribution
 
