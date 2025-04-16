@@ -1,6 +1,6 @@
 [package]
 name = "jpeg-compressor"
-version = "0.1.0"
+version = "0.1.2"
 authors = ["Jean Zamora <jeancarloscuatro1@gmail.com>"]
 description = "Change the quality of a base64 jpeg image easily from javascript."
 license = "MIT"
